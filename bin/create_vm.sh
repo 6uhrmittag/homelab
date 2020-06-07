@@ -37,8 +37,8 @@ package_upgrade: true
 EOF
 
 
-qemu-img convert "$PATH_TMP" -f qcow2 $PATH_VMS/"$VM_NAME"-ubuntu20.qcow2
-qemu-img resize $PATH_VMS/"$VM_NAME"-ubuntu20.qcow2 -f qcow2 "$VM_HDD"
+cp "$PATH_TMP" $PATH_VMS/"$VM_NAME"-ubuntu20.qcow2
+qemu-img resize $PATH_VMS/"$VM_NAME"-ubuntu20.qcow2 "$VM_HDD"
 
 
 virt-install \
