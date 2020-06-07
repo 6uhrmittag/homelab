@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 #install requirements
-REQUIREMENTS="vim git virt-manager"
+REQUIREMENTS="vim git virt-manager qemu-kvm libvirt-daemon-system virtinst cloud-utils"
 if [[ ! -z $REQUIREMENTS ]]; then
     apt-get update
     apt-get install -y -q --no-install-recommends $REQUIREMENTS
