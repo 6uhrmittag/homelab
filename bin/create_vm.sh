@@ -36,16 +36,15 @@ packages:
 package_upgrade: true
 EOF
 
-
 cp "$PATH_TMP" $PATH_VMS/"$VM_NAME"-ubuntu20.qcow2
 qemu-img resize $PATH_VMS/"$VM_NAME"-ubuntu20.qcow2 "$VM_HDD"
 cloud-localds "$PATH_VMS"/$VM_NAME.iso "$PATH_VMS"/"$VM_NAME"_init.txt
-
+rm "$PATH_VMS"/"$VM_NAME"_init.txt
 
 virt-install \
 --name $VM_NAME \
 --memory $VM_RAM \
---vcpus 8 \
+--vcpus 4 \
 --disk "$PATH_VMS"/"$VM_NAME"-ubuntu20.qcow2,device=disk,bus=virtio \
 --disk "$PATH_VMS"/$VM_NAME.iso,device=cdrom \
 --os-type linux \
