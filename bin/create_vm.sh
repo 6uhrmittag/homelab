@@ -36,7 +36,7 @@ packages:
 package_upgrade: true
 EOF
 
-qemu-img create -v -b "$PATH_TMP" -f qcow2 "$PATH_VMS"/"$VM_NAME"-ubuntu20.qcow2 "$VM_HDD"
+qemu-img create -b "$PATH_TMP" -f qcow2 "$PATH_VMS"/"$VM_NAME"-ubuntu20.qcow2 "$VM_HDD"
 
 cloud-localds "$PATH_VMS"/$VM_NAME.iso "$PATH_VMS"/"$VM_NAME"_init.txt
 
