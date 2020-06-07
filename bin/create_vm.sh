@@ -42,8 +42,8 @@ package_upgrade: true
 qemu-img create -b "$PATH_TMP" -f qcow2 "$PATH_VMS"/"$VM_NAME"-ubuntu20.qcow2 "$VM_HDD"
 
 
-echo $USERDATA > /data/libvirt/"$PATH_INIT"/"$VM_NAME"_init.txt
-cloud-localds $VM_NAME.iso /data/libvirt/"$PATH_INIT"/"$VM_NAME"_init.txt
+echo $USERDATA > "$PATH_INIT"/"$VM_NAME"_init.txt
+cloud-localds $VM_NAME.iso "$PATH_INIT"/"$VM_NAME"_init.txt
 
 
 virt-install \
