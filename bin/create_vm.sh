@@ -8,12 +8,10 @@ VM_RAM=$3
 PATH_VMS='/var/lib/libvirt/images'
 PATH_TMP='/var/lib/libvirt/images/template_ubuntu_20.img'
 
-
-
-$USERDATA="
+cat <<EOF >> "$PATH_VMS"/"$VM_NAME"_init.txt
 #cloud-config
-hostname: "$VM_NAME"
-fqdn: "$VM_NAME".slashlog.org
+hostname: $VM_NAME
+fqdn: $VM_NAME.slashlog.org
 manage_etc_hosts: true
 users:
   - name: ubuntu
@@ -36,12 +34,10 @@ packages:
   - vim
   - git
 package_upgrade: true
-"
+EOF
 
-qemu-img create -b "$PATH_TMP" -f qcow2 "$PATH_VMS"/"$VM_NAME"-ubuntu20.qcow2 "$VM_HDD"
+qemu-img create -v -b "$PATH_TMP" -f qcow2 "$PATH_VMS"/"$VM_NAME"-ubuntu20.qcow2 "$VM_HDD"
 
-
-echo $USERDATA > "$PATH_VMS"/"$VM_NAME"_init.txt
 cloud-localds "$PATH_VMS"/$VM_NAME.iso "$PATH_VMS"/"$VM_NAME"_init.txt
 
 
