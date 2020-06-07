@@ -5,9 +5,9 @@ VM_HDD=$2
 VM_RAM=1G
 VM_RAM=$3
 
-PATH_VMS='/data/libvirt'
-PATH_TMP='/data/libvirt/template_ubuntu_20.img'
-PATH_INIT='/data/libvirt'
+PATH_VMS='/var/lib/libvirt/images'
+PATH_TMP='/var/lib/libvirt/images/template_ubuntu_20.img'
+PATH_INIT='/var/lib/libvirt/images'
 
 
 

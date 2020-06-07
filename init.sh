@@ -2,17 +2,22 @@
 
 #install requirements
 REQUIREMENTS="vim git virt-manager qemu-kvm libvirt-daemon-system virtinst cloud-utils"
-if [[ ! -z $REQUIREMENTS ]]; then
+UPDATE=""
+for PACKAGE in $REQUIREMENTS; do
+  if [[ -n $UPDATE ]]; then
     apt-get update
-    apt-get install -y -q --no-install-recommends $REQUIREMENTS
+    UPDATE="DONE"
+  fi
+  apt-get install -y -q --no-install-recommends $PACKAGE
+done
+
+if [[ -f '/var/lib/libvirt/images/template_ubuntu_20.img' ]]; then
+  wget https://cloud-images.ubuntu.com/focal/current/focal-server-cloudimg-amd64.img -O /var/lib/libvirt/images/template_ubuntu_20.img
 fi
 
-if [[ -f '/data/libvirt/template_ubuntu_20.img' ]]; then
-  wget https://cloud-images.ubuntu.com/focal/current/focal-server-cloudimg-amd64.img -O /data/libvirt/template_ubuntu_20.img
-fi
+curl https://github.com/6uhrmittag.keys > ~/.ssh/authorized_keys
 
-curl https://github.com/6uhrmittag.keys | tee -a ~/.ssh/authorized_keys
-
-chmod u+x ./bin/*
-cp ./bin/* /usr/bin/
-
+for file in $(ls ./bin); do
+  cp ./bin/$file /usr/bin/
+  chmod u+x /usr/bin/$file
+done
