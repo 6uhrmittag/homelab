@@ -7,7 +7,6 @@ VM_RAM=$3
 
 PATH_VMS='/var/lib/libvirt/images'
 PATH_TMP='/var/lib/libvirt/images/template_ubuntu_20.img'
-PATH_INIT='/var/lib/libvirt/images'
 
 
 
@@ -42,16 +41,16 @@ package_upgrade: true
 qemu-img create -b "$PATH_TMP" -f qcow2 "$PATH_VMS"/"$VM_NAME"-ubuntu20.qcow2 "$VM_HDD"
 
 
-echo $USERDATA > "$PATH_INIT"/"$VM_NAME"_init.txt
-cloud-localds $VM_NAME.iso "$PATH_INIT"/"$VM_NAME"_init.txt
+echo $USERDATA > "$PATH_VMS"/"$VM_NAME"_init.txt
+cloud-localds "$PATH_VMS"/$VM_NAME.iso "$PATH_VMS"/"$VM_NAME"_init.txt
 
 
 virt-install \
 --name $VM_NAME \
 --memory $VM_RAM \
 --vcpus 8 \
---disk $PATH_VMS/"$PATH_VMS"/"$VM_NAME"-ubuntu20.qcow2,device=disk,bus=virtio \
---disk $PATH_VMS/"$VM_NAME"-ubuntu20-init.iso,device=cdrom \
+--disk "$PATH_VMS"/"$VM_NAME"-ubuntu20.qcow2,device=disk,bus=virtio \
+--disk "$PATH_VMS"/$VM_NAME.iso,device=cdrom \
 --os-type linux \
 --os-variant ubuntu20.04 \
 --virt-type kvm \
