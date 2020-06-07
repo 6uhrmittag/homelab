@@ -39,6 +39,7 @@ EOF
 
 cp "$PATH_TMP" $PATH_VMS/"$VM_NAME"-ubuntu20.qcow2
 qemu-img resize $PATH_VMS/"$VM_NAME"-ubuntu20.qcow2 "$VM_HDD"
+cloud-localds "$PATH_VMS"/$VM_NAME.iso "$PATH_VMS"/"$VM_NAME"_init.txt
 
 
 virt-install \
