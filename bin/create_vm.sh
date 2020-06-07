@@ -2,7 +2,7 @@
 
 VM_NAME=$1
 VM_HDD=$2
-VM_RAM=1G
+VM_RAM="1024"
 VM_RAM=$3
 
 PATH_VMS='/var/lib/libvirt/images'
