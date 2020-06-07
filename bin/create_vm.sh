@@ -36,9 +36,9 @@ packages:
 package_upgrade: true
 EOF
 
-qemu-img create -b "$PATH_TMP" -f qcow2 "$PATH_VMS"/"$VM_NAME"-ubuntu20.qcow2 "$VM_HDD"
 
-cloud-localds "$PATH_VMS"/$VM_NAME.iso "$PATH_VMS"/"$VM_NAME"_init.txt
+qemu-img convert "$PATH_TMP" -f qcow2 $PATH_VMS/"$VM_NAME"-ubuntu20.qcow2
+qemu-img resize $PATH_VMS/"$VM_NAME"-ubuntu20.qcow2 -f qcow2 "$VM_HDD"
 
 
 virt-install \
